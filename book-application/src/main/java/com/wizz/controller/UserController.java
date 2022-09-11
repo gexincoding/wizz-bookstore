@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @Slf4j
@@ -19,17 +21,15 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/login")
-    public ResponseResult login(@RequestBody User user ){
+    public ResponseResult<User> login(@RequestBody User user ){
         return userService.login(user);
     }
 
 
 
     @GetMapping("/borrow")
-    public ResponseResult getBooksByContent(@RequestParam("bookId") Long bookId, @RequestParam("userId") Long userId){
+    public ResponseResult<User> getBooksByContent(@RequestParam("bookId") Long bookId, @RequestParam("userId") Long userId){
         return null;
     }
-
-
 
 }
