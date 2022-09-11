@@ -73,11 +73,6 @@
                 <version>${lombok.version}</version>
                 <optional>true</optional>
             </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
-                <version>3.5.1</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
