@@ -1,8 +1,7 @@
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-
+    type: com.zaxxer.hikari.util.DriverDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:masql://localhost:3306/wizz_bookstore?characterEncoding=utf-8&&useSSL=false
     username: root
-    pas
-    url:
+    password: _Xlr20030526
