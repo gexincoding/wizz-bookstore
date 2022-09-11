@@ -5,3 +5,9 @@ spring:
     url: jdbc:masql://localhost:3306/wizz_bookstore?characterEncoding=utf-8&&useSSL=false
     username: root
     password: _Xlr20030526
+
+jwt:
+  tokenHeader: Authorization
+  expiration: 1800
+  secret: 123123
+  tokenHead: "Bearer "
