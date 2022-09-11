@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface DealMapper  extends BaseMapper<Deal> {
+public interface DealMapper extends BaseMapper<Deal> {
 }
