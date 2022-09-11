@@ -4,11 +4,8 @@ import lombok.Data;
 
 @Data
 public class User {
-    private Long bookId;
-    private String bookName;
-    private Integer bookCategoryId;
-    private Integer bookBorrowerId;
-    private Integer bookStatus;
-    private String bookISBN;
-
+    private Integer userId;
+    private String userNickname;
+    private Integer userStatus;
+    private String userPassword;
 }
