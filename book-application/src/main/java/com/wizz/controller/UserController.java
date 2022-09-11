@@ -1,5 +1,6 @@
 package com.wizz.controller;
 
+import com.wizz.common.ResponseResult;
 import com.wizz.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
