@@ -1,4 +1,4 @@
-package com.wizz.common;
+package com.wizz.entity;
 
 import lombok.Data;
 

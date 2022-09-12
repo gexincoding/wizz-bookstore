@@ -2,6 +2,7 @@ package com.wizz.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,32 +15,33 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * UserDetails的实现类
+ */
 @Data
 @NoArgsConstructor
-public class LoginUser implements UserDetails {
 
+public class LoginUser implements UserDetails {
 
     private User user;
 
+    //权限信息
     private List<String> permissions;
 
-    public LoginUser(User user, List<String> permissions) {
+    //不能序列化到redis中，序列化设置为false
+    @JSONField(serialize = false)
+    private List<SimpleGrantedAuthority> authorities;
+
+    public LoginUser(User user,List<String> permissions){
         this.user = user;
         this.permissions = permissions;
     }
-    @JSONField(serialize = false)
-    private List<SimpleGrantedAuthority> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(authorities!=null){
+        if (authorities != null) {
             return authorities;
         }
-        //把permissions中String类型的权限信息封装成SimpleGrantedAuthority对象
-//       authorities = new ArrayList<>();
-//        for (String permission : permissions) {
-//            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permission);
-//            authorities.add(authority);
-//        }
         authorities = permissions.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());

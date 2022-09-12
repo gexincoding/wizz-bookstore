@@ -1,7 +1,7 @@
 package com.wizz.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.wizz.common.ResponseResult;
+import com.wizz.entity.ResponseResult;
 import com.wizz.utils.WebUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;

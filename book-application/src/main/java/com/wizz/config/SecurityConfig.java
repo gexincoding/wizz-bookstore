@@ -1,6 +1,5 @@
 package com.wizz.config;
 
-
 import com.wizz.filter.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,14 +19,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //创建BCryptPasswordEncoder注入容器
+    /**
+     * 自定义 用BCryptPasswordEncoder加密
+     * 创建BCryptPasswordEncoder注入容器
+     *
+     * @return
+     */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-
 
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
@@ -46,11 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问
                 .antMatchers("/user/login").anonymous()
-//                .antMatchers("/testCors").hasAuthority("system:dept:list222")
+                // .antMatchers("/testCors").hasAuthority("system:dept:list222")
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
 
         //添加过滤器
+        //将jwtAuthenticationTokenFilter过滤器添加到UsernamePasswordAuthenticationFilter过滤器之前
+        //jwtAuthenticationTokenFilter是有关token验证的
+        //UsernamePasswordAuthenticationFilter是登录相关的
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         //配置异常处理器
@@ -58,7 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //配置认证失败处理器
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler);
-
         //允许跨域
         http.cors();
     }
