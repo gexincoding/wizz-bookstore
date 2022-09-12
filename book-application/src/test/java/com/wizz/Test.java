@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.List;
+
 @SpringBootTest
 public class Test {
 
@@ -19,7 +21,7 @@ public class Test {
     private MenuMapper menuMapper;
 
     @org.junit.jupiter.api.Test
-    public void BCryptPasswordEncoderTest(){
+    public void BCryptPasswordEncoderTest() {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encode = passwordEncoder.encode("_Xlr20030526");
         System.out.println(encode);
@@ -29,11 +31,12 @@ public class Test {
         System.out.println(user.getPassword());
     }
 
-  /*  @org.junit.jupiter.api.Test
-    public void SelectPermsByUserIdTest(){
-        menuMapper
+    @org.junit.jupiter.api.Test
+    public void SelectPermsByUserIdTest() {
+        List<String> strings = menuMapper.selectPermsByUserId(1L);
+        System.out.println(strings);
     }
-*/
+
     public static void main(String[] args) {
 
     }
