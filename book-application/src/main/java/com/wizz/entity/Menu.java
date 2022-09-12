@@ -29,7 +29,7 @@ public class Menu implements Serializable {
     /**
      * 菜单名
      */
-    private String menuName;
+    private String name;
     /**
      * 路由地址
      */
@@ -62,6 +62,7 @@ public class Menu implements Serializable {
     private Long updateBy;
 
     private Date updateTime;
+
     /**
      * 是否删除（0未删除 1已删除）
      */
