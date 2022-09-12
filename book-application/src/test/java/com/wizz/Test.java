@@ -1,6 +1,8 @@
 package com.wizz;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wizz.entity.User;
 import com.wizz.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +19,10 @@ public class Test {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encode = passwordEncoder.encode("_Xlr20030526");
         System.out.println(encode);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        User user = userMapper.selectOne(queryWrapper.eq("username", "xialinrui"));
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
     }
 
     public static void main(String[] args) {
