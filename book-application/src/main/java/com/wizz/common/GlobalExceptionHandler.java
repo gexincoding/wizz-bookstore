@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseResult<String> exceptionHandler(SQLIntegrityConstraintViolationException ex){
-        log.error(ex.getMessage());
+        //log.error(ex.getMessage());
 
         if(ex.getMessage().contains("Duplicate entry")){
             String[] split = ex.getMessage().split(" ");
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MyServiceException.class)
     public ResponseResult<String> exceptionHandler(MyServiceException ex){
-        log.error(ex.getMessage());
+        //log.error(ex.getMessage());
         return ResponseResult.error(ex.getMessage());
     }
 }
