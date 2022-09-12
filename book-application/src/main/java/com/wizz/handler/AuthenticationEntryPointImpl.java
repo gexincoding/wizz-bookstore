@@ -14,11 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 认证失败的异常处理
+ */
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        ResponseResult result = new ResponseResult(HttpStatus.UNAUTHORIZED.value(),"用户认证失败请查询登录");
+        ResponseResult result = new ResponseResult(HttpStatus.UNAUTHORIZED.value(),"您还没有登陆哦，无法进行此操作～");
         String json = JSON.toJSONString(result);
         //处理异常
         WebUtils.renderString(response,json);
