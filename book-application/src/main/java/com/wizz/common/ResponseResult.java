@@ -13,17 +13,21 @@ public class ResponseResult<T> implements Serializable {
 
     private T data;
 
-    public static <T> ResponseResult<T> success(T object){
-        ResponseResult<T> r = new ResponseResult<>();
-        r.code = 1;
-        r.data = object;
-        return r;
+    public ResponseResult(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 
-    public static <T> ResponseResult<T> error(String message){
-        ResponseResult<T> r = new ResponseResult<>();
-        r.code = 0;
-        r.msg = message;
-        return r;
+    public ResponseResult(Integer code, T data) {
+        this.code = code;
+        this.data = data;
     }
+
+    public ResponseResult(Integer code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
+
 }

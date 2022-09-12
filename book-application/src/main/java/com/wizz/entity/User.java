@@ -24,7 +24,7 @@ public class User implements Serializable , UserDetailsService {
 
     private Integer userStatus;
 
-    private String userPassword;
+    private String password;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
