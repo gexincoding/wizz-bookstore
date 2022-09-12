@@ -28,7 +28,7 @@ public class BookController {
         queryWrapper.like(name!=null, Book::getBookName, name);
         queryWrapper.orderByAsc(Book::getBookName);
         bookService.page(pageInfo, queryWrapper);
-        return ResponseResult.success(pageInfo);
+        return new ResponseResult(400,pageInfo);
     };
 
     @GetMapping("/list")
@@ -38,7 +38,7 @@ public class BookController {
         queryWrapper.eq(Book::getBookCategoryId, book.getBookCategoryId());
         queryWrapper.orderByAsc(Book::getBookName);
         List<Book> list = bookService.list(queryWrapper);
-        return ResponseResult.success(list);
+        return new ResponseResult(400,list);
     }
 
 
