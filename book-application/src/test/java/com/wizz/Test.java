@@ -3,6 +3,7 @@ package com.wizz;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wizz.entity.User;
+import com.wizz.mapper.MenuMapper;
 import com.wizz.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +14,9 @@ public class Test {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private MenuMapper menuMapper;
 
     @org.junit.jupiter.api.Test
     public void BCryptPasswordEncoderTest(){
@@ -25,6 +29,11 @@ public class Test {
         System.out.println(user.getPassword());
     }
 
+  /*  @org.junit.jupiter.api.Test
+    public void SelectPermsByUserIdTest(){
+        menuMapper
+    }
+*/
     public static void main(String[] args) {
 
     }
