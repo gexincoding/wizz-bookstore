@@ -2,16 +2,14 @@ package com.wizz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wizz.common.ResponseResult;
+import com.wizz.entity.ResponseResult;
 import com.wizz.entity.Book;
 import com.wizz.service.BookService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @Slf4j
@@ -28,7 +26,7 @@ public class BookController {
         queryWrapper.like(name!=null, Book::getBookName, name);
         queryWrapper.orderByAsc(Book::getBookName);
         bookService.page(pageInfo, queryWrapper);
-        return ResponseResult.success(pageInfo);
+        return new ResponseResult(400,pageInfo);
     };
 
     @GetMapping("/list")
@@ -38,7 +36,7 @@ public class BookController {
         queryWrapper.eq(Book::getBookCategoryId, book.getBookCategoryId());
         queryWrapper.orderByAsc(Book::getBookName);
         List<Book> list = bookService.list(queryWrapper);
-        return ResponseResult.success(list);
+        return new ResponseResult(400,list);
     }
 
 

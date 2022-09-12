@@ -1,13 +1,19 @@
-
-
 spring:
   datasource:
-    druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://47.108.237.99:3306/book_manager?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: root
-      password: fyft123456
-      time-between-eviction-runs-millis: 300000
+    type: com.zaxxer.hikari.util.DriverDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.108.237.99:3306/wizz_bookstore?characterEncoding=utf-8&&useSSL=false
+    username: root
+    password: _Xlr20030526
+  redis:
+    host: 47.108.237.99
+    port: 6379
+
+
+server:
+  port: 80
+
+
 
 mybatis-plus:
   configuration:
