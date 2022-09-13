@@ -7,4 +7,14 @@
                 (select book_id from book where book_name = #{book_name}),
                 now())
     </insert>
+
+
+    <select id="getToReturnBookByUsername" resultType="com.wizz.dto.BookReturnDto">
+        select b.book_name book_name,
+               bb.borrow_time borrow_time
+        from book b
+                 left join book_borrower bb on b.book_id = bb.book_id
+                 left join user u on u.user_id = bb.borrower_id
+        where u.username = #{username}
+    </select>
 </mapper>

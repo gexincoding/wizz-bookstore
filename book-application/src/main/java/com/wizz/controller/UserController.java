@@ -1,11 +1,14 @@
 package com.wizz.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wizz.dto.BookReturnDto;
 import com.wizz.dto.BookStatusDto;
 import com.wizz.entity.LoginUser;
 import com.wizz.entity.ResponseResult;
 import com.wizz.entity.User;
 import com.wizz.service.BookService;
 import com.wizz.service.UserService;
+import com.wizz.vo.ReturnBookVo;
 import com.wizz.vo.SingleBookRequestVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +55,12 @@ public class UserController {
         return new ResponseResult(200, "已经成功借阅哦～记得及时归还～");
     }
 
-    @RequestMapping("/return/list")
-    public ResponseResult getToReturnList() {
+    @RequestMapping("/show/return/list")
+    public ResponseResult<Page<BookReturnDto>> getToReturnList(@RequestBody ReturnBookVo returnBookVo) {
         LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = currentUserDetails.getUsername();
-        return null;
+        returnBookVo.setUsername(username);
+        return userService.getToReturnBooksByReturnBookVo(returnBookVo);
     }
 
 }
