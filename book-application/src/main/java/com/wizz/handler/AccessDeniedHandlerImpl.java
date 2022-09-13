@@ -13,11 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 授权失败的异常处理
+ */
 @Component
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        ResponseResult result = new ResponseResult(HttpStatus.FORBIDDEN.value(),"您的权限不足");
+        ResponseResult result = new ResponseResult(HttpStatus.FORBIDDEN.value(),"不是管理员，不能乱来哦");
         String json = JSON.toJSONString(result);
         //处理异常
         WebUtils.renderString(response,json);

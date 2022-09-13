@@ -1,17 +1,12 @@
 package com.wizz.controller;
 
-import com.wizz.entity.Book;
 import com.wizz.entity.LoginUser;
 import com.wizz.entity.ResponseResult;
 import com.wizz.entity.User;
 import com.wizz.service.UserService;
-import com.wizz.utils.JwtUtil;
-import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,7 +33,7 @@ public class UserController {
     }
 
     @RequestMapping("/return/list")
-    public ResponseResult getToReturnList(){
+    public ResponseResult getToReturnList() {
         LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = currentUserDetails.getUsername();
         return null;

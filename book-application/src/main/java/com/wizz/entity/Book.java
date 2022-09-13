@@ -21,9 +21,13 @@ public class Book implements Serializable {
 
     private Integer bookCategoryId;
 
+    private String bookCategoryName;
+
+    private String bookStatusName;
+
     private Integer bookBorrowerId;
 
-    private Integer bookStatus;
+    private Integer bookStatusId;
 
     private String bookISBN;
 
