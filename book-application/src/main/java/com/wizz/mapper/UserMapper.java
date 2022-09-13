@@ -19,4 +19,6 @@ public interface UserMapper extends BaseMapper<User> {
     void addNewBorrowRecordByBookNameAndUserName(@Param("book_name") String bookName, @Param("username")String username);
 
     IPage<BookReturnDto> getToReturnBookByUsername(@Param("page") Page<BookReturnDto> page, @Param("username") String Username);
+
+    IPage<BookDto> getFavouritesBooksByUsername(@Param("page") Page<BookReturnDto> page, @Param("username")String username);
 }

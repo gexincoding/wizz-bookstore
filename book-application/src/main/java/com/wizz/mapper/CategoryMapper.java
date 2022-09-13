@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
+
+
+
 }

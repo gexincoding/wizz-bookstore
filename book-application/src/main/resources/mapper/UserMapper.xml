@@ -10,11 +10,19 @@
 
 
     <select id="getToReturnBookByUsername" resultType="com.wizz.dto.BookReturnDto">
-        select b.book_name book_name,
+        select b.book_name    book_name,
                bb.borrow_time borrow_time
         from book b
                  left join book_borrower bb on b.book_id = bb.book_id
                  left join user u on u.user_id = bb.borrower_id
+        where u.username = #{username}
+    </select>
+
+    <select id="getFavouritesBooksByUsername" resultType="com.wizz.dto.BookDto">
+        select b.book_name book_name
+        from user u
+                 left join favorite f on u.user_id = f.user_id
+                 left join book b on f.book_id = b.book_id
         where u.username = #{username}
     </select>
 </mapper>

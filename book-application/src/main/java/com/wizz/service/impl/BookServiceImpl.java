@@ -1,6 +1,5 @@
 package com.wizz.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wizz.dto.BookDto;
@@ -11,6 +10,7 @@ import com.wizz.mapper.BookMapper;
 import com.wizz.service.BookService;
 import com.wizz.vo.BookSearchVo;
 import com.wizz.vo.CategoryVo;
+import com.wizz.vo.RecommendationVo;
 import com.wizz.vo.SingleBookRequestVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -54,6 +54,14 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     @Override
     public void borrowOneUpdate(String bookName) {
         bookMapper.updateBookNumberStatusByBookName(bookName);
+    }
+
+
+    @Override
+    public void addRecommendationInfoByRecommendationVo(RecommendationVo recommendationVo) {
+        bookMapper.addBook(recommendationVo.getBookName(),recommendationVo.getPublisher(),recommendationVo.getCategoryName());
+        bookMapper.setRecommendation(recommendationVo.getUsername(),recommendationVo.getBookName(),recommendationVo.getReasons());
+
     }
 
 

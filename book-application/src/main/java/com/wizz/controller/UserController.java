@@ -1,6 +1,7 @@
 package com.wizz.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wizz.dto.BookDto;
 import com.wizz.dto.BookReturnDto;
 import com.wizz.dto.BookStatusDto;
 import com.wizz.entity.LoginUser;
@@ -8,7 +9,7 @@ import com.wizz.entity.ResponseResult;
 import com.wizz.entity.User;
 import com.wizz.service.BookService;
 import com.wizz.service.UserService;
-import com.wizz.vo.ReturnBookVo;
+import com.wizz.vo.BookVo;
 import com.wizz.vo.SingleBookRequestVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class UserController {
 
     @Autowired
     private BookService bookService;
+
 
     @PostMapping("/login")
     public ResponseResult login(@RequestBody User user) {
@@ -56,11 +58,19 @@ public class UserController {
     }
 
     @RequestMapping("/show/return/list")
-    public ResponseResult<Page<BookReturnDto>> getToReturnList(@RequestBody ReturnBookVo returnBookVo) {
+    public ResponseResult<Page<BookReturnDto>> getToReturnList(@RequestBody BookVo bookVo) {
         LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = currentUserDetails.getUsername();
-        returnBookVo.setUsername(username);
-        return userService.getToReturnBooksByReturnBookVo(returnBookVo);
+        bookVo.setUsername(username);
+        return userService.getToReturnBooksByReturnBookVo(bookVo);
+    }
+
+    @RequestMapping("/get/favourites")
+    public ResponseResult<Page<BookDto>> getFavouritesBooksList(@RequestBody BookVo bookVo) {
+        LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = currentUserDetails.getUsername();
+        bookVo.setUsername(username);
+        return userService.getFavouritesBooksByBookVo(bookVo);
     }
 
 }

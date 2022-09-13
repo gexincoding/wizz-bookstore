@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wizz.dto.BookDto;
 import com.wizz.dto.BookReturnDto;
-import com.wizz.entity.Book;
 import com.wizz.entity.ResponseResult;
 import com.wizz.entity.LoginUser;
 import com.wizz.entity.User;
@@ -12,9 +11,7 @@ import com.wizz.mapper.UserMapper;
 import com.wizz.service.UserService;
 import com.wizz.utils.JwtUtil;
 import com.wizz.utils.RedisCache;
-import com.wizz.vo.BookSearchVo;
-import com.wizz.vo.CategoryVo;
-import com.wizz.vo.ReturnBookVo;
+import com.wizz.vo.BookVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -95,9 +92,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 
     @Override
-    public ResponseResult<Page<BookReturnDto>> getToReturnBooksByReturnBookVo(ReturnBookVo returnBookVo) {
-        Page<BookReturnDto> page = new Page<>(returnBookVo.getPage(), returnBookVo.getPageSize());
-        userMapper.getToReturnBookByUsername(page, returnBookVo.getUsername());
+    public ResponseResult<Page<BookReturnDto>> getToReturnBooksByReturnBookVo(BookVo bookVo) {
+        Page<BookReturnDto> page = new Page<>(bookVo.getPage(), bookVo.getPageSize());
+        userMapper.getToReturnBookByUsername(page, bookVo.getUsername());
+        return new ResponseResult(200, page);
+    }
+
+    @Override
+    public ResponseResult<Page<BookDto>> getFavouritesBooksByBookVo(BookVo bookVo) {
+        Page<BookReturnDto> page = new Page<>(bookVo.getPage(), bookVo.getPageSize());
+        userMapper.getFavouritesBooksByUsername(page, bookVo.getUsername());
         return new ResponseResult(200, page);
     }
 }

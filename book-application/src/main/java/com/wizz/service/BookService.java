@@ -8,6 +8,7 @@ import com.wizz.entity.Book;
 import com.wizz.entity.ResponseResult;
 import com.wizz.vo.BookSearchVo;
 import com.wizz.vo.CategoryVo;
+import com.wizz.vo.RecommendationVo;
 import com.wizz.vo.SingleBookRequestVo;
 
 
@@ -22,5 +23,8 @@ public interface BookService extends IService<Book> {
     void changeStatusToNoLeft(String bookName);
 
     void borrowOneUpdate(String bookName);
+
+    void addRecommendationInfoByRecommendationVo(RecommendationVo recommendationVo);
+
 
 }
