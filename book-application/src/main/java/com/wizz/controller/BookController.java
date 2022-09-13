@@ -22,7 +22,6 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-
     /**
      * 根据用户输入查询书籍，返回分页信息
      * @param bookSearchVo
@@ -37,6 +36,5 @@ public class BookController {
     public ResponseResult<Page<Book>> searchBooksByCategoryName(@RequestBody CategoryVo categoryVo) {
         return bookService.getBooksByCategoryName(categoryVo);
     }
-
 
 }
