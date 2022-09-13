@@ -16,23 +16,12 @@ public class Book implements Serializable {
 
     @TableId
     private Long bookId;
-
     private String bookName;
-
-    private Integer bookCategoryId;
-
-    private String bookCategoryName;
-
-    private String bookStatusName;
-
-    private Integer bookBorrowerId;
-
-    private Integer bookStatusId;
-
     private String bookISBN;
-
+    private Integer bookStatusId;
     private Integer bookLeftNumbers;
-
+    private Integer bookTotalNumbers;
+    private Integer bookLentNumbers;
     private String bookImage;
 
 }

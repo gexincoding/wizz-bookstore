@@ -2,6 +2,7 @@ package com.wizz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wizz.dto.BookDto;
 import com.wizz.entity.Category;
 import com.wizz.entity.ResponseResult;
 import com.wizz.entity.Book;
@@ -29,12 +30,12 @@ public class BookController {
      * @return
      */
     @GetMapping("/search/content")
-    public ResponseResult<Page<Book>> searchBooksByContent(@RequestBody BookSearchVo bookSearchVo) {
+    public ResponseResult<Page<BookDto>> searchBooksByContent(@RequestBody BookSearchVo bookSearchVo) {
         return bookService.getBooksByContent(bookSearchVo);
     }
 
     @GetMapping("/search/category")
-    public ResponseResult<Page<Book>> searchBooksByCategoryName(@RequestBody CategoryVo categoryVo) {
+    public ResponseResult<Page<BookDto>> searchBooksByCategoryName(@RequestBody CategoryVo categoryVo) {
         return bookService.getBooksByCategoryName(categoryVo);
     }
 
