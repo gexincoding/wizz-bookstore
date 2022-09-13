@@ -2,9 +2,12 @@ package com.wizz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wizz.entity.Category;
 import com.wizz.entity.ResponseResult;
 import com.wizz.entity.Book;
 import com.wizz.service.BookService;
+import com.wizz.vo.BookSearchVo;
+import com.wizz.vo.CategoryVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,24 +22,20 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/page")
-    public ResponseResult<Page> getBookPage(int page, int pageSize, String name){
-        Page<Book> pageInfo = new Page<>();
-        LambdaQueryWrapper<Book> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(name!=null, Book::getBookName, name);
-        queryWrapper.orderByAsc(Book::getBookName);
-        bookService.page(pageInfo, queryWrapper);
-        return new ResponseResult(400,pageInfo);
-    };
 
-    @GetMapping("/list")
-    public ResponseResult<List<Book>> getBookList(Book book){
-        //获取book的categoryId,并查询数据库
-        LambdaQueryWrapper<Book> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Book::getBookCategoryId, book.getBookCategoryId());
-        queryWrapper.orderByAsc(Book::getBookName);
-        List<Book> list = bookService.list(queryWrapper);
-        return new ResponseResult(400,list);
+    /**
+     * 根据用户输入查询书籍，返回分页信息
+     * @param bookSearchVo
+     * @return
+     */
+    @GetMapping("/search/content")
+    public ResponseResult<Page<Book>> searchBooksByContent(@RequestBody BookSearchVo bookSearchVo) {
+        return bookService.getBooksByContent(bookSearchVo);
+    }
+
+    @GetMapping("/search/category")
+    public ResponseResult<Page<Book>> searchBooksByCategoryName(@RequestBody CategoryVo categoryVo) {
+        return bookService.getBooksByCategoryName(categoryVo);
     }
 
 

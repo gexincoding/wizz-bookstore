@@ -2,7 +2,6 @@ package com.wizz.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

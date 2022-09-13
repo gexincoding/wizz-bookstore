@@ -23,7 +23,7 @@ public class Test {
     @org.junit.jupiter.api.Test
     public void BCryptPasswordEncoderTest() {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encode = passwordEncoder.encode("_Xlr20030526");
+        String encode = passwordEncoder.encode("123456");
         System.out.println(encode);
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         User user = userMapper.selectOne(queryWrapper.eq("username", "xialinrui"));
