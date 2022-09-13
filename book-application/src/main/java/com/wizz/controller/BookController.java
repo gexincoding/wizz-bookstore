@@ -37,4 +37,9 @@ public class BookController {
         return bookService.getBooksByCategoryName(categoryVo);
     }
 
+    @PostMapping
+    public ResponseResult<String> borrow(@ResponseBody Book book){
+        return null;
+    }
+
 }
