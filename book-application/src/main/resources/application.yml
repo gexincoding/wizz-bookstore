@@ -10,9 +10,6 @@ spring:
     port: 6379
 
 
-server:
-  port: 80
-
 
 
 mybatis-plus:
