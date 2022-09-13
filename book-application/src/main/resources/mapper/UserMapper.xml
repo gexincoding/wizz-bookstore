@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wizz.mapper.UserMapper">
+    <insert id="addNewBorrowRecordByBookNameAndUserName">
+        insert into book_borrower
+        values ((select user_id borrower_id from user where username = #{username}),
+                (select book_id from book where book_name = #{book_name}),
+                now())
+    </insert>
+</mapper>

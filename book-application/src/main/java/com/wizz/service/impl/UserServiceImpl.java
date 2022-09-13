@@ -1,5 +1,6 @@
 package com.wizz.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wizz.entity.ResponseResult;
 import com.wizz.entity.LoginUser;
 import com.wizz.entity.User;
@@ -19,8 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Service
-public class UserServiceImpl implements UserService {
-
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -79,6 +79,11 @@ public class UserServiceImpl implements UserService {
         redisCache.deleteObject("login:" + userid);
         //返回信息
         return new ResponseResult(200, "注销成功");
+    }
+
+    @Override
+    public void borrowBookByBookName(String bookName,String username) {
+        userMapper.addNewBorrowRecordByBookNameAndUserName(bookName,username);
     }
 
 

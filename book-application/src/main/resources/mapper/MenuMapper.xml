@@ -12,4 +12,5 @@
           and r.`status` = 0
           and m.`status` = 0
     </select>
+
 </mapper>

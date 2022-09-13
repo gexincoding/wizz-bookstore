@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wizz.mapper.BookMapper">
+    <update id="updateStatusNameByBookName">
+        update book
+        set book_status_id = (select id from book_status where status_name = '已借空')
+        where book_name = #{book_name}
+    </update>
+
+
+    <update id="updateBookNumberStatusByBookName">
+        update book
+        set book_left_numbers = book_left_numbers - 1,
+            book_lent_numbers = book_lent_numbers + 1
+        where book_name = #{book_name}
+    </update>
+
+    <select id="getBookByCategoryName" resultType="com.wizz.dto.BookDto">
+        select b.book_name         book_name,
+               c.category_name     book_category_name,
+               bx.status_name      book_status_name,
+               b.book_left_numbers book_left_numbers
+        from book b
+                 left join book_category bc on b.book_id = bc.book_id
+                 left join category c on bc.category_id = c.category_id
+                 left join book_status bx on bx.id = b.book_status_id
+        where c.category_name = #{category_name}
+    </select>
+
+    <select id="getBookByContent" resultType="com.wizz.dto.BookDto">
+        select b.book_name         book_name,
+               bx.status_name      book_status_name,
+               b.book_left_numbers book_left_numbers
+        from book b
+                 left join book_status bx on bx.id = b.book_status_id
+        where b.book_name like '%${content}%'
+    </select>
+    <select id="getBookStatusListByBookName" resultType="com.wizz.dto.BookStatusDto">
+        select b.book_name          book_name,
+               bs.status_name       book_status_name,
+               b.book_left_numbers  book_left_numbers,
+               b.book_lent_numbers  book_lent_numbers,
+               b.book_total_numbers book_total_numbers
+        from book b,
+             book_status bs
+        where b.book_status_id = bs.id
+          and b.book_name = #{book_name}
+    </select>
+    <select id="getBookStatusListByISBN" resultType="com.wizz.dto.BookStatusDto">
+        select b.book_name          book_name,
+               bs.status_name       book_status_name,
+               b.book_left_numbers  book_left_numbers,
+               b.book_lent_numbers  book_lent_numbers,
+               b.book_total_numbers book_total_numbers
+        from book b,
+             book_status bs
+        where b.book_status_id = bs.id
+          and b.book_ISBN = #{isbn}
+
+
+    </select>
+
+
+</mapper>

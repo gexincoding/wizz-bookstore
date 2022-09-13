@@ -1,15 +1,17 @@
 package com.wizz.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wizz.dto.BookDto;
+import com.wizz.dto.BookStatusDto;
 import com.wizz.entity.Book;
 import com.wizz.entity.ResponseResult;
 import com.wizz.mapper.BookMapper;
 import com.wizz.service.BookService;
 import com.wizz.vo.BookSearchVo;
 import com.wizz.vo.CategoryVo;
+import com.wizz.vo.SingleBookRequestVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -35,16 +37,23 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     }
 
     @Override
-    public Book getBookByBookName(String bookName) {
-        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("book_name",bookName);
-        Book book = bookMapper.selectOne(queryWrapper);
-        return book;
+    public BookStatusDto getBookStatusBySingleBookRequestVo(SingleBookRequestVo singleBookRequestVo) {
+        String bookName = singleBookRequestVo.getBookName();
+        String isbn = singleBookRequestVo.getISBN();
+        if (isbn != null && isbn != "") {
+            return bookMapper.getBookStatusListByISBN(isbn);
+        }
+        return bookMapper.getBookStatusListByBookName(bookName);
     }
 
     @Override
-    public Integer getBookStatusIdByBookName(String bookName) {
-        return getBookByBookName(bookName).getBookStatusId();
+    public void changeStatusToNoLeft(String bookName) {
+       bookMapper.updateStatusNameByBookName(bookName);
+    }
+
+    @Override
+    public void borrowOneUpdate(String bookName) {
+        bookMapper.updateBookNumberStatusByBookName(bookName);
     }
 
 

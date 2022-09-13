@@ -1,10 +1,12 @@
 package com.wizz.controller;
 
+import com.wizz.dto.BookStatusDto;
 import com.wizz.entity.LoginUser;
 import com.wizz.entity.ResponseResult;
 import com.wizz.entity.User;
 import com.wizz.service.BookService;
 import com.wizz.service.UserService;
+import com.wizz.vo.SingleBookRequestVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,21 +36,20 @@ public class UserController {
 
 
     @GetMapping("/borrow")
-    public ResponseResult getBooksByContent() {
-      /*  LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseResult getBooksByContent(@RequestBody SingleBookRequestVo singleBookRequestVo) {
+        LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = currentUserDetails.getUsername();
+        BookStatusDto bookStatusDto = bookService.getBookStatusBySingleBookRequestVo(singleBookRequestVo);
         //如果状态为已借空，返回借阅失败信息
-        if (bookService.getBookStatusIdByBookName(bookName) == 3){
-            return new ResponseResult<>(401,"已经全被借走啦～过几天再来看看哦！");
-        }else{//如果状态为有存余：如果库存为1，库存减1，状态该为已借空；如果库存>1，库存-1。绑定借阅者与图书信息。返回成功信息
-
-
+        if (bookStatusDto.getBookStatusName().equals("已借空")) {
+            return new ResponseResult(201, "书已经没有啦，下次再来～");
         }
-
-
-*/
-        return new ResponseResult(200,"已经成功借阅哦～记得及时归还～");
-
+        if (bookStatusDto.getBookLeftNumbers() == 1) {
+            bookService.changeStatusToNoLeft(bookStatusDto.getBookName());
+        }
+        bookService.borrowOneUpdate(bookStatusDto.getBookName());
+        userService.borrowBookByBookName(bookStatusDto.getBookName(), username);
+        return new ResponseResult(200, "已经成功借阅哦～记得及时归还～");
     }
 
     @RequestMapping("/return/list")

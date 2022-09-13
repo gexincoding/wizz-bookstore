@@ -11,4 +11,5 @@ public interface UserService {
     ResponseResult logout();
 
 
+    void borrowBookByBookName(String bookName,String username);
 }
