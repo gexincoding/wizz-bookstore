@@ -1,16 +1,15 @@
 package com.wizz.dto;
 
+import com.wizz.entity.Book;
 import lombok.Data;
 
-@Data
-public class BookDto {
+import java.io.Serializable;
 
-    private String bookName;
+@Data
+public class BookDto extends Book implements Serializable {
 
     private String bookCategoryName;
 
     private String bookStatusName;
-
-    private String bookLeftNumbers;
 
 }

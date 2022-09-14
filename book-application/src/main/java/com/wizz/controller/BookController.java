@@ -29,15 +29,13 @@ public class BookController {
     private CategoryService categoryService;
 
 
-    /**
-     * 根据用户输入查询书籍，返回分页信息
-     *
-     * @param bookSearchVo
-     * @return
-     */
+
     @GetMapping("/list/content")
-    public ResponseResult<Page<BookDto>> searchBooksByContent(@RequestBody BookSearchVo bookSearchVo) {
-        return bookService.getBooksByContent(bookSearchVo);
+    public ResponseResult<Page<BookDto>> searchBooksByContent(int page, int pageSize, String content) {
+        Page<BookDto> pageInfo = new Page<>(page, pageSize);
+        List<BookDto> bookDto = bookService.getBooksByContent(content);
+        pageInfo.setRecords(bookDto);
+        return new ResponseResult<>(200, pageInfo);
     }
 
     @GetMapping("/list")

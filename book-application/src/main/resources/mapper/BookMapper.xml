@@ -49,11 +49,13 @@
     </select>
 
     <select id="getBookByContent" resultType="com.wizz.dto.BookDto">
-        select b.book_name         book_name,
-               bx.status_name      book_status_name,
-               b.book_left_numbers book_left_numbers
+        select b.book_name              book_name,
+               bx.status_name           book_status_name,
+               b.book_left_numbers      book_left_numbers,
+               c.category_name          book_category_name
         from book b
                  left join book_status bx on bx.id = b.book_status_id
+                 left join book_category c on c.id = b.book_category_id
         where b.book_name like '%${content}%'
     </select>
     <select id="getBookStatusListByBookName" resultType="com.wizz.dto.BookStatusDto">
