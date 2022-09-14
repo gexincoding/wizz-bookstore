@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface BookMapper extends BaseMapper<Book> {
-    IPage<BookDto> getBookByCategoryId(@Param("page") Page<Book> page, @Param("category_name") String categoryName);
+    List<BookDto> getBookByCategoryId(@Param("category_name") Long id);
 
     List<BookDto> getBookByContent(@Param("content") String content);
 

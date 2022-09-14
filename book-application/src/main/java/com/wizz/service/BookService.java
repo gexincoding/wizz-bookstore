@@ -15,7 +15,7 @@ public interface BookService extends IService<Book> {
 
     List<BookDto> getBooksByContent(String content);
 
-    ResponseResult<Page<BookDto>> getBooksByCategoryName(CategoryVo categoryVo);
+    List<BookDto> getBooksByCategoryId(Long categoryId);
 
     BookStatusDto getBookStatusBySingleBookRequestVo(SingleBookRequestVo singleBookRequestVo);
 

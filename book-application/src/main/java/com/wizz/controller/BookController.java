@@ -29,7 +29,13 @@ public class BookController {
     private CategoryService categoryService;
 
 
-
+    /**
+     * 根据书名模糊查询书籍
+     * @param page
+     * @param pageSize
+     * @param content
+     * @return
+     */
     @GetMapping("/list/content")
     public ResponseResult<Page<BookDto>> searchBooksByContent(int page, int pageSize, String content) {
         Page<BookDto> pageInfo = new Page<>(page, pageSize);
@@ -38,9 +44,17 @@ public class BookController {
         return new ResponseResult<>(200, pageInfo);
     }
 
+    /**
+     * 根据分类查询书籍
+     * @param categoryVo
+     * @return
+     */
     @GetMapping("/list")
-    public ResponseResult<Page<BookDto>> searchBooksByCategoryName(@RequestBody CategoryVo categoryVo) {
-        return bookService.getBooksByCategoryName(categoryVo);
+    public ResponseResult<Page<BookDto>> searchBooksByCategoryId(int page, int pageSize, Long categoryId) {
+        Page<BookDto> pageInfo = new Page<>(page, pageSize);
+        List<BookDto> bookDto = bookService.getBooksByCategoryId(categoryId);
+        pageInfo.setRecords(bookDto);
+        return new ResponseResult<>(200, pageInfo);
     }
 
 
