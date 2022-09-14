@@ -92,6 +92,7 @@ public class UserController {
         }
         userService.changePasswordByUsernameAndNewPassword(changePasswordVo.getUsername(), passwordEncoder.encode(changePasswordVo.getNewPassword()));
         return new ResponseResult(200, "修改密码成功，请重新登录～");
+
     }
 
 

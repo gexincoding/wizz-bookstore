@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -68,9 +69,14 @@ public class BookController {
 
 
     //管理员批量添加书籍
-    @RequestMapping("/add")
+    @PostMapping("/add")
     public ResponseResult addBook(@RequestBody List<BookDetailedInfoVo> bookDetailedInfoVoList) {
+        int count = 0;
         for (BookDetailedInfoVo bookDetailedInfoVo : bookDetailedInfoVoList) {
+            if (bookDetailedInfoVo.getBookISBN() == null) {
+                continue;
+            }
+            count++;
             //根据ISBN到后台查询书籍情况
             QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("book_ISBN", bookDetailedInfoVo.getBookISBN());
@@ -81,6 +87,6 @@ public class BookController {
                 bookService.insertBookByBookDetailedInfoVo(bookDetailedInfoVo);
             }
         }
-        return new ResponseResult(200, "添加成功");
+        return new ResponseResult(200, "添加成功～共成功添加" + count + "本书～");
     }
 }
