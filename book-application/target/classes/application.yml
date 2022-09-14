@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.util.DriverDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.108.237.99:3306/wizz_bookstore?characterEncoding=utf-8&&useSSL=false
+    username: root
+    password: _Xlr20030526
+  redis:
+    host: 47.108.237.99
+    port: 6379
+
+
+
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: assign_id
+server:
+  port: 80
