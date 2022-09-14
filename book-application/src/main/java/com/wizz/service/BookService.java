@@ -29,4 +29,7 @@ public interface BookService extends IService<Book> {
     void updateBookNumbersByISBN(String bookISBN);
 
     void insertBookByBookDetailedInfoVo(BookDetailedInfoVo bookDetailedInfoVo);
+
+    List<BookStatusDto> getBookStatusList();
+
 }

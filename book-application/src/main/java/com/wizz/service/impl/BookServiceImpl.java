@@ -67,8 +67,10 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     @Override
     public void insertBookByBookDetailedInfoVo(BookDetailedInfoVo bookDetailedInfoVo) {
         bookMapper.insertBook(bookDetailedInfoVo.getBookName(),bookDetailedInfoVo.getBookISBN(),bookDetailedInfoVo.getAuthor(),bookDetailedInfoVo.getPublisher());
-
     }
 
-
+    @Override
+    public List<BookStatusDto> getBookStatusList() {
+        return  bookMapper.selectBookStatus();
+    }
 }

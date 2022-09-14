@@ -36,4 +36,7 @@ public interface BookMapper extends BaseMapper<Book> {
     void insertBook(@Param("book_name") String bookName, @Param("book_ISBN") String bookISBN, @Param("author") String author, @Param("publisher") String publisher);
 
     void updateBookNumbersByISBN(@Param("book_ISBN") String bookISBN);
+
+    List<BookStatusDto> selectBookStatus();
+
 }

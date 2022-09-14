@@ -83,7 +83,6 @@ public class UserController {
     public ResponseResult changePassword(@RequestBody ChangePasswordVo changePasswordVo) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
         queryWrapper.eq("username", changePasswordVo.getUsername());
         User user = userService.getOne(queryWrapper);
         if (user == null) {

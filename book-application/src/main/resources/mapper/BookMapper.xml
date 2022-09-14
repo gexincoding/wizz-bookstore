@@ -48,10 +48,10 @@
     </select>
 
     <select id="getBookByContent" resultType="com.wizz.dto.BookDto">
-        select b.book_name              book_name,
-               bx.status_name           book_status_name,
-               b.book_left_numbers      book_left_numbers,
-               c.category_name          book_category_name
+        select b.book_name         book_name,
+               bx.status_name      book_status_name,
+               b.book_left_numbers book_left_numbers,
+               c.category_name     book_category_name
         from book b
                  left join book_status bx on bx.id = b.book_status_id
                  left join book_category c on c.id = b.book_category_id
@@ -79,5 +79,18 @@
         where b.book_status_id = bs.id
           and b.book_ISBN = #{isbn}
     </select>
+    <select id="selectBookStatus" resultType="com.wizz.dto.BookStatusDto">
+        select b.book_name         book_name,
+               b.book_publisher    book_publisher,
+               b.book_author       book_author,
+               b.book_ISBN         book_ISBN,
+               bs.status_name      status_name,
+               b.book_left_numbers book_left_numbers
+        from book b
+                 left join book_status bs on b.book_status_id = bs.id
+        where b.book_ISBN is not null
+          and b.book_ISBN !=''
+    </select>
+
 
 </mapper>
