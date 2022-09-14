@@ -6,5 +6,5 @@ import lombok.Data;
 public class CategoryVo {
     private int page;
     private int pageSize;
-    private String categoryName;
+    private String categoryId;
 }

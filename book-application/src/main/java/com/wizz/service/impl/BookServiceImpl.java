@@ -8,6 +8,7 @@ import com.wizz.entity.Book;
 import com.wizz.entity.ResponseResult;
 import com.wizz.mapper.BookMapper;
 import com.wizz.service.BookService;
+import com.wizz.service.UserService;
 import com.wizz.vo.BookSearchVo;
 import com.wizz.vo.CategoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements BookService {
+
+    private UserService userService;
 
     @Autowired
     private BookMapper bookMapper;
@@ -28,9 +31,9 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     }
 
     @Override
-    public ResponseResult<Page<BookDto>> getBooksByCategoryName(CategoryVo categoryVo) {
+    public ResponseResult<Page<BookDto>> getBooksByCategoryId(CategoryVo categoryVo) {
         Page<Book> page = new Page<>(categoryVo.getPage(), categoryVo.getPageSize());
-        bookMapper.getBookByCategoryName(page, categoryVo.getCategoryName());
+        bookMapper.getBookByCategoryId(page, categoryVo.getCategoryId());
         return new ResponseResult(200, page);
     }
 

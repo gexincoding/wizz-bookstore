@@ -33,14 +33,14 @@ public class BookController {
         return bookService.getBooksByContent(bookSearchVo);
     }
 
+    /**
+     * 根据分类id查询书籍，返回分页信息
+     * @param categoryVo
+     * @return
+     */
     @GetMapping("/search/category")
-    public ResponseResult<Page<BookDto>> searchBooksByCategoryName(@RequestBody CategoryVo categoryVo) {
-        return bookService.getBooksByCategoryName(categoryVo);
-    }
-
-    @PostMapping
-    public ResponseResult<String> borrow(@ResponseBody Book book){
-        return null;
+    public ResponseResult<Page<BookDto>> searchBooksByCategoryId(@RequestBody CategoryVo categoryVo) {
+        return bookService.getBooksByCategoryId(categoryVo);
     }
 
 }

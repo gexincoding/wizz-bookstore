@@ -12,7 +12,7 @@ import com.wizz.vo.CategoryVo;
 public interface BookService extends IService<Book> {
 
     ResponseResult<Page<BookDto>> getBooksByContent(BookSearchVo bookSearchVo);
-    ResponseResult<Page<BookDto>> getBooksByCategoryName(CategoryVo categoryVo);
+    ResponseResult<Page<BookDto>> getBooksByCategoryId(CategoryVo categoryVo);
 
     Book getBookByBookName(String bookName);
     Integer getBookStatusIdByBookName(String bookName);
