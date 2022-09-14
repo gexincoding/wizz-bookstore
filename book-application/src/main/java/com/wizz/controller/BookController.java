@@ -35,7 +35,7 @@ public class BookController {
      * @param bookSearchVo
      * @return
      */
-    @GetMapping("/search/content")
+    @GetMapping("/list/content")
     public ResponseResult<Page<BookDto>> searchBooksByContent(@RequestBody BookSearchVo bookSearchVo) {
         return bookService.getBooksByContent(bookSearchVo);
     }

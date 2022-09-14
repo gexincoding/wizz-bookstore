@@ -21,7 +21,6 @@ public interface UserService extends IService<User>{
 
     ResponseResult<Page<BookDto>> getFavouritesBooksByBookVo(BookVo bookVo);
 
-
     void changePasswordByUsernameAndNewPassword(String username, String encode);
 
 
