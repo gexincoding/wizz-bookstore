@@ -44,11 +44,6 @@ public class BookController {
         return new ResponseResult<>(200, pageInfo);
     }
 
-    /**
-     * 根据分类查询书籍
-     * @param categoryVo
-     * @return
-     */
     @GetMapping("/list")
     public ResponseResult<Page<BookDto>> searchBooksByCategoryId(int page, int pageSize, Long categoryId) {
         Page<BookDto> pageInfo = new Page<>(page, pageSize);
@@ -56,8 +51,6 @@ public class BookController {
         pageInfo.setRecords(bookDto);
         return new ResponseResult<>(200, pageInfo);
     }
-
-
 
 
 
