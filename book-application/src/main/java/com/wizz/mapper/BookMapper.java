@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface BookMapper extends BaseMapper<Book> {
-    IPage<BookDto> getBookByCategoryName(@Param("page") Page<Book> page, @Param("category_name") String categoryName);
+    IPage<BookDto> getBookByCategoryId(@Param("page") Page<Book> page, @Param("category_name") String categoryName);
 
     IPage<BookDto> getBookByContent(@Param("page") Page<Book> page, @Param("content") String content);
 

@@ -29,7 +29,7 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     @Override
     public ResponseResult<Page<BookDto>> getBooksByCategoryName(CategoryVo categoryVo) {
         Page<Book> page = new Page<>(categoryVo.getPage(), categoryVo.getPageSize());
-        bookMapper.getBookByCategoryName(page, categoryVo.getCategoryName());
+        bookMapper.getBookByCategoryId(page, categoryVo.getCategoryId());
         return new ResponseResult(200, page);
     }
 
