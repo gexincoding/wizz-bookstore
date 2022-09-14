@@ -104,4 +104,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userMapper.getFavouritesBooksByUsername(page, bookVo.getUsername());
         return new ResponseResult(200, page);
     }
+
+    @Override
+    public void changePasswordByUsernameAndNewPassword(String username, String encode) {
+        userMapper.updateUser(username,encode);
+    }
 }

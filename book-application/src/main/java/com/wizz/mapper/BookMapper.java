@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wizz.dto.BookDto;
 import com.wizz.dto.BookStatusDto;
 import com.wizz.entity.Book;
-import com.wizz.vo.RecommendationVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -26,10 +25,13 @@ public interface BookMapper extends BaseMapper<Book> {
 
     void updateBookNumberStatusByBookName(@Param("book_name") String bookName);
 
-
     //通过书名、出版社名称、类名加入图书
     void addBook(@Param("book_name") String bookName, @Param("publisher") String publisher, @Param("category_name") String categoryName);
 
     //根据用户名、书名查找到对应的用户id和书id之后，和推荐原因一起存入recommend表
     void setRecommendation(@Param("username") String username, @Param("book_name") String bookName, @Param("reasons") String reasons);
+
+    void insertBook(@Param("book_name") String bookName, @Param("book_ISBN") String bookISBN, @Param("author") String author, @Param("publisher") String publisher);
+
+    void updateBookNumbersByISBN(@Param("book_ISBN") String bookISBN);
 }

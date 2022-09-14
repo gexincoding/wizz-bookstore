@@ -8,10 +8,7 @@ import com.wizz.entity.Book;
 import com.wizz.entity.ResponseResult;
 import com.wizz.mapper.BookMapper;
 import com.wizz.service.BookService;
-import com.wizz.vo.BookSearchVo;
-import com.wizz.vo.CategoryVo;
-import com.wizz.vo.RecommendationVo;
-import com.wizz.vo.SingleBookRequestVo;
+import com.wizz.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -61,6 +58,17 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     public void addRecommendationInfoByRecommendationVo(RecommendationVo recommendationVo) {
         bookMapper.addBook(recommendationVo.getBookName(),recommendationVo.getPublisher(),recommendationVo.getCategoryName());
         bookMapper.setRecommendation(recommendationVo.getUsername(),recommendationVo.getBookName(),recommendationVo.getReasons());
+
+    }
+
+    @Override
+    public void updateBookNumbersByISBN(String bookISBN) {
+        bookMapper.updateBookNumbersByISBN(bookISBN);
+    }
+
+    @Override
+    public void insertBookByBookDetailedInfoVo(BookDetailedInfoVo bookDetailedInfoVo) {
+        bookMapper.insertBook(bookDetailedInfoVo.getBookName(),bookDetailedInfoVo.getBookISBN(),bookDetailedInfoVo.getAuthor(),bookDetailedInfoVo.getPublisher());
 
     }
 

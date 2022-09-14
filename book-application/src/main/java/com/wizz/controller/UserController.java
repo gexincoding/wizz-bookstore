@@ -1,5 +1,6 @@
 package com.wizz.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wizz.dto.BookDto;
 import com.wizz.dto.BookReturnDto;
@@ -10,10 +11,12 @@ import com.wizz.entity.User;
 import com.wizz.service.BookService;
 import com.wizz.service.UserService;
 import com.wizz.vo.BookVo;
+import com.wizz.vo.ChangePasswordVo;
 import com.wizz.vo.SingleBookRequestVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -72,5 +75,26 @@ public class UserController {
         bookVo.setUsername(username);
         return userService.getFavouritesBooksByBookVo(bookVo);
     }
+
+
+    @RequestMapping("/change/password")
+    public ResponseResult changePassword(@RequestBody ChangePasswordVo changePasswordVo) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        queryWrapper.eq("username", changePasswordVo.getUsername());
+        User user = userService.getOne(queryWrapper);
+        if (user == null) {
+            return new ResponseResult(400, "用户名不存在～");
+        }
+        if (!passwordEncoder.matches(changePasswordVo.getOldPassword(), user.getPassword())) {
+            return new ResponseResult(400, "原始密码错误~");
+        }
+        userService.changePasswordByUsernameAndNewPassword(changePasswordVo.getUsername(), passwordEncoder.encode(changePasswordVo.getNewPassword()));
+        return new ResponseResult(200, "修改密码成功，请重新登录～");
+    }
+
+
+
 
 }

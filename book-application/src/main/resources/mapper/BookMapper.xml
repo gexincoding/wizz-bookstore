@@ -16,11 +16,25 @@
             book_lent_numbers = book_lent_numbers + 1
         where book_name = #{book_name}
     </update>
+    <update id="updateBookNumbersByISBN">
+        update book
+        set book_left_numbers  = book_left_numbers + 1,
+            book_total_numbers = book_total_numbers + 1,
+            book_status_id     = 2
+        where book_ISBN = #{book_ISBN}
+    </update>
     <insert id="setRecommendation">
         insert into recommendation
         values ((select u.user_id from user u where u.username = #{username}),
                 (select b.book_id from book b where b.book_name = #{book_name}),
                 #{reasons})
+    </insert>
+    <insert id="insertBook">
+        insert into book (book_name, book_ISBN, book_status_id, book_left_numbers, book_total_numbers,
+                          book_lent_numbers,
+                          book_image, book_publisher, book_author)
+        values (#{book_name}, #{book_ISBN}, 2, 1, 1, 0, null, #{publisher}, #{author})
+
     </insert>
     <select id="getBookByCategoryName" resultType="com.wizz.dto.BookDto">
         select b.book_name         book_name,
@@ -64,6 +78,5 @@
         where b.book_status_id = bs.id
           and b.book_ISBN = #{isbn}
     </select>
-
 
 </mapper>

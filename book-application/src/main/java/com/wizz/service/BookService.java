@@ -6,10 +6,7 @@ import com.wizz.dto.BookDto;
 import com.wizz.dto.BookStatusDto;
 import com.wizz.entity.Book;
 import com.wizz.entity.ResponseResult;
-import com.wizz.vo.BookSearchVo;
-import com.wizz.vo.CategoryVo;
-import com.wizz.vo.RecommendationVo;
-import com.wizz.vo.SingleBookRequestVo;
+import com.wizz.vo.*;
 
 
 public interface BookService extends IService<Book> {
@@ -27,4 +24,7 @@ public interface BookService extends IService<Book> {
     void addRecommendationInfoByRecommendationVo(RecommendationVo recommendationVo);
 
 
+    void updateBookNumbersByISBN(String bookISBN);
+
+    void insertBookByBookDetailedInfoVo(BookDetailedInfoVo bookDetailedInfoVo);
 }

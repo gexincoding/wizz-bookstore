@@ -7,6 +7,11 @@
                 (select book_id from book where book_name = #{book_name}),
                 now())
     </insert>
+    <update id="updateUser">
+        update user
+        set password = #{password}
+        where username = #{username}
+    </update>
 
 
     <select id="getToReturnBookByUsername" resultType="com.wizz.dto.BookReturnDto">

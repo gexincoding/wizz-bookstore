@@ -21,4 +21,6 @@ public interface UserMapper extends BaseMapper<User> {
     IPage<BookReturnDto> getToReturnBookByUsername(@Param("page") Page<BookReturnDto> page, @Param("username") String Username);
 
     IPage<BookDto> getFavouritesBooksByUsername(@Param("page") Page<BookReturnDto> page, @Param("username")String username);
+
+    void updateUser(@Param("username") String username, @Param("password")String encode);
 }
