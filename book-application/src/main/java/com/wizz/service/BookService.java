@@ -8,12 +8,14 @@ import com.wizz.entity.Book;
 import com.wizz.entity.ResponseResult;
 import com.wizz.vo.*;
 
+import java.util.List;
+
 
 public interface BookService extends IService<Book> {
 
-    ResponseResult<Page<BookDto>> getBooksByContent(BookSearchVo bookSearchVo);
+    List<BookDto> getBooksByContent(String content);
 
-    ResponseResult<Page<BookDto>> getBooksByCategoryName(CategoryVo categoryVo);
+    List<BookDto> getBooksByCategoryId(Long categoryId);
 
     BookStatusDto getBookStatusBySingleBookRequestVo(SingleBookRequestVo singleBookRequestVo);
 

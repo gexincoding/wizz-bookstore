@@ -10,12 +10,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface BookMapper extends BaseMapper<Book> {
-    IPage<BookDto> getBookByCategoryId(@Param("page") Page<Book> page, @Param("category_name") String categoryName);
+    List<BookDto> getBookByCategoryId(@Param("category_name") Long id);
 
-    IPage<BookDto> getBookByContent(@Param("page") Page<Book> page, @Param("content") String content);
+    List<BookDto> getBookByContent(@Param("content") String content);
 
     BookStatusDto getBookStatusListByBookName(@Param("book_name") String bookName);
 

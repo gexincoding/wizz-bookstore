@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements BookService {
 
@@ -20,17 +22,13 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     private BookMapper bookMapper;
 
     @Override
-    public ResponseResult<Page<BookDto>> getBooksByContent(BookSearchVo bookSearchVo) {
-        Page<Book> page = new Page<>(bookSearchVo.getPage(), bookSearchVo.getPageSize());
-        bookMapper.getBookByContent(page, bookSearchVo.getContent());
-        return new ResponseResult(200, page);
+    public List<BookDto> getBooksByContent(String content) {
+        return bookMapper.getBookByContent(content);
     }
 
     @Override
-    public ResponseResult<Page<BookDto>> getBooksByCategoryName(CategoryVo categoryVo) {
-        Page<Book> page = new Page<>(categoryVo.getPage(), categoryVo.getPageSize());
-        bookMapper.getBookByCategoryId(page, categoryVo.getCategoryId());
-        return new ResponseResult(200, page);
+    public List<BookDto> getBooksByCategoryId(Long categoryId) {
+        return bookMapper.getBookByCategoryId(categoryId);
     }
 
     @Override

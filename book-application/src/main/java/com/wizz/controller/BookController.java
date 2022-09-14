@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @RestController
 @Slf4j
@@ -27,42 +30,35 @@ public class BookController {
 
 
     /**
-     * 根据用户输入查询书籍，返回分页信息
-     *
-     * @param bookSearchVo
+     * 根据书名模糊查询书籍
+     * @param page
+     * @param pageSize
+     * @param content
      * @return
      */
     @GetMapping("/list/content")
-    public ResponseResult<Page<BookDto>> searchBooksByContent(@RequestBody BookSearchVo bookSearchVo) {
-        return bookService.getBooksByContent(bookSearchVo);
+    public ResponseResult<Page<BookDto>> searchBooksByContent(int page, int pageSize, String content) {
+        Page<BookDto> pageInfo = new Page<>(page, pageSize);
+        List<BookDto> bookDto = bookService.getBooksByContent(content);
+        pageInfo.setRecords(bookDto);
+        return new ResponseResult<>(200, pageInfo);
     }
 
-    @GetMapping("/search/category")
-    public ResponseResult<Page<BookDto>> searchBooksByCategoryName(@RequestBody CategoryVo categoryVo) {
-        return bookService.getBooksByCategoryName(categoryVo);
+    /**
+     * 根据分类查询书籍
+     * @param categoryVo
+     * @return
+     */
+    @GetMapping("/list")
+    public ResponseResult<Page<BookDto>> searchBooksByCategoryId(int page, int pageSize, Long categoryId) {
+        Page<BookDto> pageInfo = new Page<>(page, pageSize);
+        List<BookDto> bookDto = bookService.getBooksByCategoryId(categoryId);
+        pageInfo.setRecords(bookDto);
+        return new ResponseResult<>(200, pageInfo);
     }
 
 
-    @PostMapping("/recommend")
-    public ResponseResult recommend(@RequestBody RecommendationVo recommendationVo) {
-        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
-        bookQueryWrapper.eq("book_name", recommendationVo.getBookName());
-        Book book = bookService.getOne(bookQueryWrapper);
-        if (book != null && book.getBookStatusId() != 1) {
-            return new ResponseResult(401, "书架中已经有这本书了哦！快去看看吧～");
-        }
-        QueryWrapper<Category> categoryQueryWrapper = new QueryWrapper<>();
-        categoryQueryWrapper.eq("category_name", recommendationVo.getCategoryName());
-        Category category = categoryService.getOne(categoryQueryWrapper);
-        if (category == null) {
-            return new ResponseResult(401, "没有这个分类哦");
-        }
-        LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = currentUserDetails.getUsername();
-        recommendationVo.setUsername(username);
-        bookService.addRecommendationInfoByRecommendationVo(recommendationVo);
-        return new ResponseResult(200, "推荐成功");
-    }
+
 
 
     //管理员批量添加书籍
