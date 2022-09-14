@@ -1,5 +1,6 @@
 package com.wizz.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,20 +16,14 @@ public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId
-    private Long bookId;   //图书id
-
-    private String bookName;   //图书名
-
-    private String bookISBN;   //ISBN编号
-
-    private Integer bookStatusId;  //状态
-
-    private Integer bookLeftNumbers;   //余量
-
-    private Integer bookTotalNumbers;   //总量
-
-    private Integer bookLentNumbers;    //借出量
-
-    private String bookImage;    //例图
+    private Long bookId;
+    private String bookName;
+    @TableField("book_ISBN")
+    private String bookISBN;
+    private Integer bookStatusId;
+    private Integer bookLeftNumbers;
+    private Integer bookTotalNumbers;
+    private Integer bookLentNumbers;
+    private String bookImage;
 
 }

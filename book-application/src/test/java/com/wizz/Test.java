@@ -23,12 +23,8 @@ public class Test {
     @org.junit.jupiter.api.Test
     public void BCryptPasswordEncoderTest() {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encode = passwordEncoder.encode("123456");
-        System.out.println(encode);
-        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
-        User user = userMapper.selectOne(queryWrapper.eq("username", "xialinrui"));
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
+        System.out.println(passwordEncoder.matches("123456", "$2a$10$XOGpU6veVbzOGY/iuWTCceLAC7pwrJxIgk7NRI4SsIXb6tqv4/nP2"));
+
     }
 
     @org.junit.jupiter.api.Test
