@@ -2,7 +2,7 @@ package com.wizz.handler;
 
 import com.alibaba.fastjson.JSON;
 
-import com.wizz.entity.ResponseResult;
+import com.wizz.dao.ResponseResult;
 import com.wizz.utils.WebUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

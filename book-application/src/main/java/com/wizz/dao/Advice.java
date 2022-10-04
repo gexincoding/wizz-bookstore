@@ -1,4 +1,4 @@
-package com.wizz.entity;
+package com.wizz.dao;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
@@ -10,14 +10,19 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Recommendation implements Serializable {
+public class Advice implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId
-    private Long recommenderId;
+    private Long adviceId;
 
-    private Integer recommendBookId;
+    private Integer adviserId;
 
-    private Integer recommendReason;
+    private String adviceContent;
+
+    private Integer adviceStatus;
+
+    private Integer adviceBookId;
+
 }

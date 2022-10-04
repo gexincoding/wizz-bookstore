@@ -2,16 +2,16 @@ package com.wizz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 
-import com.wizz.entity.LoginUser;
-import com.wizz.entity.User;
+import com.wizz.dao.LoginUser;
+import com.wizz.dao.User;
 import com.wizz.mapper.MenuMapper;
 import com.wizz.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,10 +21,10 @@ import java.util.Objects;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+    @Resource
     private MenuMapper menuMapper;
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override

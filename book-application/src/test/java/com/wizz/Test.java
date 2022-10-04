@@ -1,8 +1,6 @@
 package com.wizz;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wizz.entity.User;
 import com.wizz.mapper.MenuMapper;
 import com.wizz.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

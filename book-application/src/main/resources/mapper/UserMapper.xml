@@ -1,33 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wizz.mapper.UserMapper">
-    <insert id="addNewBorrowRecordByBookNameAndUserName">
-        insert into book_borrower
-        values ((select user_id borrower_id from user where username = #{username}),
-                (select book_id from book where book_name = #{book_name}),
-                now())
-    </insert>
     <update id="updateUser">
         update user
         set password = #{password}
         where username = #{username}
     </update>
-
-
-    <select id="getToReturnBookByUsername" resultType="com.wizz.dto.BookReturnDto">
-        select b.book_name    book_name,
-               bb.borrow_time borrow_time
-        from book b
-                 left join book_borrower bb on b.book_id = bb.book_id
-                 left join user u on u.user_id = bb.borrower_id
-        where u.username = #{username}
-    </select>
-
-    <select id="getFavouritesBooksByUsername" resultType="com.wizz.dto.BookDto">
-        select b.book_name book_name
-        from user u
-                 left join favorite f on u.user_id = f.user_id
-                 left join book b on f.book_id = b.book_id
-        where u.username = #{username}
-    </select>
 </mapper>

@@ -1,8 +1,7 @@
 package com.wizz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wizz.entity.Book;
-import com.wizz.entity.Menu;
+import com.wizz.dao.Menu;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +11,4 @@ import java.util.List;
 @Repository
 public interface MenuMapper extends BaseMapper<Menu> {
     List<String> selectPermsByUserId(Long userId);
-
-
 }

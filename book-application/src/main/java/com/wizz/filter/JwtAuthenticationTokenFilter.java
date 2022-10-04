@@ -1,6 +1,6 @@
 package com.wizz.filter;
 
-import com.wizz.entity.LoginUser;
+import com.wizz.dao.LoginUser;
 import com.wizz.utils.JwtUtil;
 import com.wizz.utils.RedisCache;
 import io.jsonwebtoken.Claims;

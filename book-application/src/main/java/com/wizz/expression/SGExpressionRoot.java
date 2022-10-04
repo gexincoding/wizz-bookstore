@@ -1,6 +1,6 @@
 package com.wizz.expression;
 
-import com.wizz.entity.LoginUser;
+import com.wizz.dao.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,6 @@ import java.util.List;
 
 @Component("ex")
 public class SGExpressionRoot {
-
     public boolean hasAuthority(String authority) {
         //获取当前用户的权限
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

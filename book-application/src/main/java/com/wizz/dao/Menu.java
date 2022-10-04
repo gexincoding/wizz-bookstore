@@ -1,4 +1,4 @@
-package com.wizz.entity;
+package com.wizz.dao;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

@@ -1,4 +1,4 @@
-package com.wizz.entity;
+package com.wizz.dao;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
