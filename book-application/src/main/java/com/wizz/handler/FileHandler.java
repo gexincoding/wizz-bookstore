@@ -10,6 +10,6 @@ public class FileHandler extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/img/**").addResourceLocations("/Users/xialinrui/test_image/");
+        registry.addResourceHandler("/img/**").addResourceLocations("file:/Users/xialinrui/test_image/");
     }
 }

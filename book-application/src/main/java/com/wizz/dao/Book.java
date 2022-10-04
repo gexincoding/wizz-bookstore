@@ -18,7 +18,7 @@ public class Book implements Serializable {
     private Long id;
     private String name;
     private String isbn;
-    private Integer left;
+    private Integer rest;
     private Integer lent;
     private String imageUrl;
     private String publisher;

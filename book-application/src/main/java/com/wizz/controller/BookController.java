@@ -42,7 +42,7 @@ public class BookController {
             bookQueryWrapper.eq("isbn", book.getIsbn());
             Book ifHas = bookService.getOne(bookQueryWrapper);
             if (ifHas != null) {
-                ifHas.setLeft(ifHas.getLeft() + book.getNumbers());
+                ifHas.setRest(ifHas.getRest() + book.getNumbers());
                 bookService.updateById(ifHas);
                 continue;
             }
