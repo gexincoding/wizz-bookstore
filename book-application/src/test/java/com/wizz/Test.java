@@ -4,6 +4,7 @@ package com.wizz;
 import com.wizz.mapper.MenuMapper;
 import com.wizz.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -11,6 +12,11 @@ import java.util.List;
 
 @SpringBootTest
 public class Test {
+
+
+    @Value("${rootPath}")
+    private String rootPath;
+
 
     @Autowired
     private UserMapper userMapper;
@@ -31,7 +37,14 @@ public class Test {
         System.out.println(strings);
     }
 
+
+    @org.junit.jupiter.api.Test
+    public void testPath() {
+        System.out.println(rootPath);
+    }
+
     public static void main(String[] args) {
+
 
     }
 }

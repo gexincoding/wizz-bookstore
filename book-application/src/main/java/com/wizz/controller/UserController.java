@@ -27,7 +27,7 @@ public class UserController {
         return userService.logout();
     }
 
-    @RequestMapping("/change/password")
+    @PutMapping("/change/password")
     public ResponseResult changePassword(@RequestBody User user) {
         LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = currentUserDetails.getUsername();
