@@ -101,7 +101,7 @@ public class BookController {
     public ResponseResult<Page<Book>> listLike(@RequestParam String content, @RequestParam Integer page, @RequestParam Integer pageSize) {
         Page<Book> resPage = new Page<>(page, pageSize);
         QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
-        bookQueryWrapper.like("name", content).orderByDesc("update_time");
+        bookQueryWrapper.like("name", content).orderByDesc("name");
         bookService.page(resPage, bookQueryWrapper);
         return new ResponseResult(200, "查询成功", resPage);
     }
@@ -181,7 +181,7 @@ public class BookController {
 
 
     @PutMapping("/return/isbn")
-    public ResponseResult returnId(@RequestParam String isbn) {
+    public ResponseResult returnIsbn(@RequestParam String isbn) {
         LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = currentUserDetails.getUser();
         Book book = bookService.getOne(new QueryWrapper<Book>().eq("isbn", isbn));
@@ -194,4 +194,24 @@ public class BookController {
         bookService.returnBook(book, user.getUserId());
         return new ResponseResult<>(200, "借阅成功");
     }
+
+
+    /**
+     * 根据分类id查询该分类的所有图书
+     *
+     * @param page
+     * @param pageSize
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/list/category")
+    public ResponseResult<Page<Book>> listCategory(@RequestParam Integer page, @RequestParam Integer pageSize, @RequestParam Long categoryId) {
+        Page<Book> resPage = new Page<>(page, pageSize);
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.like("category_id", categoryId).orderByDesc("name");
+        bookService.page(resPage, bookQueryWrapper);
+        return new ResponseResult(200, "查询成功", resPage);
+    }
+
+
 }

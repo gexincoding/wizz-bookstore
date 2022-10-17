@@ -6,4 +6,15 @@
         set password = #{password}
         where username = #{username}
     </update>
+    <select id="getDetails" resultType="com.wizz.dto.UserInfoDto">
+        select distinct u.user_id      user_id,
+                        u.username     username,
+                        u.phone_number phone_number,
+                        u.real_name    real_name,
+                        d.name         dept_name
+        from user u
+                 left join dept d on d.id = u.dept_id
+        where u.user_id = #{user_id}
+
+    </select>
 </mapper>

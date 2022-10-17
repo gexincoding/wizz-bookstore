@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wizz.dao.ResponseResult;
 import com.wizz.dao.LoginUser;
 import com.wizz.dao.User;
+import com.wizz.dto.UserInfoDto;
 import com.wizz.mapper.UserMapper;
 import com.wizz.service.UserService;
 import com.wizz.utils.JwtUtil;
@@ -85,5 +86,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void changePasswordByUsernameAndNewPassword(String username, String encode) {
         userMapper.updateUser(username,encode);
+    }
+
+    @Override
+    public UserInfoDto getDetails(Long userId) {
+        return  userMapper.getDetails(userId);
     }
 }
