@@ -22,8 +22,6 @@ mybatis-plus:
     db-config:
       id-type: assign_id
 server:
-  port: 80
-
-rootPath: '/Users/xialinrui/test_image'
+  port: 8090
 
 

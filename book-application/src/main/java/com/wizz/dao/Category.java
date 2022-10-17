@@ -9,12 +9,15 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * @author xialinrui
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category implements Serializable {
     @TableId
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;    //分类id
-    private String name;   //分类名
+    private Long id;
+    private String name;
 }

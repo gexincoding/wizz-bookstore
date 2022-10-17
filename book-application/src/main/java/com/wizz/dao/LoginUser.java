@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 /**
  * UserDetails的实现类
+ * @author xialinrui
  */
 @Data
 @NoArgsConstructor
@@ -23,10 +24,14 @@ public class LoginUser implements UserDetails {
 
     private User user;
 
-    //权限信息
+    /**
+     * 权限信息
+     */
     private List<String> permissions;
 
-    //不能序列化到redis中，序列化设置为false
+    /**
+     *  不能序列化到redis中，序列化设置为false
+     */
     @JSONField(serialize = false)
     private List<SimpleGrantedAuthority> authorities;
 
