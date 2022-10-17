@@ -36,6 +36,7 @@ public class Book implements Serializable {
     private Date updateTime;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
+    private String introduction;
 
 
 }
