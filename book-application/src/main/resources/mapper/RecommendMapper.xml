@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wizz.mapper.RecommendMapper">
+
+
+    <select id="listPage" resultType="com.wizz.dto.RecommendDto">
+        select distinct r.id          id,
+                        c.name        category,
+                        r.name        name,
+                        r.publisher   publisher,
+                        r.create_time create_time,
+                        u.username    username,
+                        r.reason      reason,
+                        r.author      author
+        from recommend r
+                 left join user u on r.user_id = u.user_id
+                 left join category c on c.id = r.category_id
+        order by create_time desc, r.category_id desc, name desc, u.user_id desc, publisher desc, author desc
+    </select>
+</mapper>
