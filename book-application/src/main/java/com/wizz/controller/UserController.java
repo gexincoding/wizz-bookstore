@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+/**
+ * @author xialinrui
+ */
 @RestController
 @Slf4j
 @RequestMapping("/user")

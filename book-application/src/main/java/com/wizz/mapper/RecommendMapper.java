@@ -1,11 +1,14 @@
 package com.wizz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wizz.dao.Advice;
+import com.wizz.dao.Recommend;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-@Repository
+/**
+ * @author xialinrui
+ */
 @Mapper
-public interface AdviceMapper extends BaseMapper<Advice> {
+@Repository
+public interface RecommendMapper extends BaseMapper<Recommend> {
 }
