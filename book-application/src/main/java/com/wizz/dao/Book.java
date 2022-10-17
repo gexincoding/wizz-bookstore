@@ -10,8 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 
 /**
  * @author xialinrui
@@ -37,6 +36,4 @@ public class Book implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
     private String introduction;
-
-
 }
