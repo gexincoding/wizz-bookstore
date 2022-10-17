@@ -22,8 +22,6 @@ mybatis-plus:
     db-config:
       id-type: assign_id
 server:
-  port: 80
-
-rootPath: https://gexin.work/wizz_bookstore/
+  port: 8090
 
 

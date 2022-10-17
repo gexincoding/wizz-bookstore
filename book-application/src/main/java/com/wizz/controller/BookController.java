@@ -3,9 +3,13 @@ package com.wizz.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wizz.dao.Book;
+import com.wizz.dao.LoginUser;
 import com.wizz.dao.ResponseResult;
+import com.wizz.dao.User;
 import com.wizz.service.BookService;
+import com.wizz.vo.BorrowInfoVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,6 +25,7 @@ public class BookController {
 
     @Resource
     private BookService bookService;
+
 
     /**
      * 添加新图书
@@ -113,5 +118,80 @@ public class BookController {
         bookQueryWrapper.eq("isbn", isbn);
         Book book = bookService.getOne(bookQueryWrapper);
         return new ResponseResult(200, "查询成功", book);
+    }
+
+
+    /**
+     * 根据ID借书
+     *
+     * @param bookId
+     * @return
+     */
+    @PutMapping("/borrow/id")
+    public ResponseResult borrow(@RequestParam("id") Long bookId) {
+        LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = currentUserDetails.getUser();
+        BorrowInfoVo borrowInfoVo = bookService.getBorrowInfo(bookId, user.getUserId());
+        //用户正在借阅这个书籍，提示用户不能重复借阅同一本书
+        if (borrowInfoVo != null) {
+            return new ResponseResult<>(400, "您已经借过该书啦～");
+        }
+        //否则 让用户借阅 库存-1
+        Book book = bookService.getById(bookId);
+        bookService.borrow(book, user.getUserId());
+        return new ResponseResult<>(200, "借阅成功");
+    }
+
+    @PutMapping("/borrow/isbn")
+    public ResponseResult borrow(@RequestParam String isbn) {
+        LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = currentUserDetails.getUser();
+        Book book = bookService.getOne(new QueryWrapper<Book>().eq("isbn", isbn));
+        BorrowInfoVo borrowInfoVo = bookService.getBorrowInfo(book.getId(), user.getUserId());
+        //用户正在借阅这个书籍，提示用户不能重复借阅同一本书
+        if (borrowInfoVo != null) {
+            return new ResponseResult<>(400, "您已经借过该书啦～");
+        }
+        //否则 让用户借阅 库存-1
+        bookService.borrow(book, user.getUserId());
+        return new ResponseResult<>(200, "借阅成功");
+    }
+
+
+    /**
+     * 根据ID借书
+     *
+     * @param bookId
+     * @return
+     */
+    @PutMapping("/return/id")
+    public ResponseResult returnId(@RequestParam("id") Long bookId) {
+        LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = currentUserDetails.getUser();
+        BorrowInfoVo borrowInfoVo = bookService.getBorrowInfo(bookId, user.getUserId());
+        //用户没有借阅这本书，直接返回
+        if (borrowInfoVo == null) {
+            return new ResponseResult<>(400, "您未借阅此书～");
+        }
+        //否则 让用户还书 库存+1
+        Book book = bookService.getById(bookId);
+        bookService.returnBook(book, user.getUserId());
+        return new ResponseResult<>(200, "借阅成功");
+    }
+
+
+    @PutMapping("/return/isbn")
+    public ResponseResult returnId(@RequestParam String isbn) {
+        LoginUser currentUserDetails = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = currentUserDetails.getUser();
+        Book book = bookService.getOne(new QueryWrapper<Book>().eq("isbn", isbn));
+        BorrowInfoVo borrowInfoVo = bookService.getBorrowInfo(book.getId(), user.getUserId());
+        //用户没有借阅这本书，直接返回
+        if (borrowInfoVo == null) {
+            return new ResponseResult<>(400, "您未借阅此书～");
+        }
+        //否则 让用户还书 库存+1
+        bookService.returnBook(book, user.getUserId());
+        return new ResponseResult<>(200, "借阅成功");
     }
 }
