@@ -1,5 +1,7 @@
 package com.wizz.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,9 +11,11 @@ import java.util.Date;
  */
 @Data
 public class UserBorrowInfoDto {
-    private String name;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long userId;
+    private String username;
     private String phone;
-    private String dept;
+    private String deptName;
     private String book;
     private String imageUrl;
     private Date date;

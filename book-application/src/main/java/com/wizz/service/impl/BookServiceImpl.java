@@ -2,6 +2,8 @@ package com.wizz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wizz.dao.Book;
+import com.wizz.dto.UserBorrowInfoDto;
+import com.wizz.dto.UserInfoDto;
 import com.wizz.mapper.BookMapper;
 import com.wizz.service.BookService;
 
@@ -55,5 +57,10 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
         book.setLent(book.getLent() - 1);
         book.setRest(book.getRest() + 1);
         this.updateById(book);
+    }
+
+    @Override
+    public List<UserBorrowInfoDto> getBorrower(Long bookId) {
+        return bookMapper.getBorrower(bookId);
     }
 }

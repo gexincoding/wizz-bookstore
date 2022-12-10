@@ -24,4 +24,15 @@
           and user_id = #{user_id}
 
     </select>
+    <select id="getBorrower" resultType="com.wizz.dto.UserBorrowInfoDto">
+        select distinct u.user_id  user_id,
+                        u.username username,
+                        d.name     dept_name,
+                        b.creat_time date
+        from user u
+            left join borrow b
+        on u.user_id = b.user_id
+            left join dept d on d.id = u.dept_id
+        where b.book_id = #{book_id}
+    </select>
 </mapper>

@@ -2,6 +2,8 @@ package com.wizz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wizz.dao.Book;
+import com.wizz.dto.UserBorrowInfoDto;
+import com.wizz.dto.UserInfoDto;
 import com.wizz.vo.BorrowInfoVo;
 
 import java.util.List;
@@ -37,4 +39,5 @@ public interface BookService extends IService<Book> {
 
     void returnBook(Book book, Long userId);
 
+    List<UserBorrowInfoDto> getBorrower(Long bookId);
 }

@@ -6,6 +6,7 @@ import com.wizz.dao.Book;
 import com.wizz.dao.LoginUser;
 import com.wizz.dao.ResponseResult;
 import com.wizz.dao.User;
+import com.wizz.dto.UserBorrowInfoDto;
 import com.wizz.service.BookService;
 import com.wizz.vo.BorrowInfoVo;
 import lombok.extern.slf4j.Slf4j;
@@ -213,5 +214,19 @@ public class BookController {
         return new ResponseResult(200, "查询成功", resPage);
     }
 
+
+    /**
+     * 根据图书id查询正在借阅这本书的人
+     * @param bookId
+     * @return
+     */
+    @GetMapping("/borrower")
+    public ResponseResult<List<UserBorrowInfoDto>> borrower(@RequestParam("id") Long bookId) {
+        List<UserBorrowInfoDto> resList = bookService.getBorrower(bookId);
+        return new ResponseResult<>(200, "查询成功", resList);
+    }
+
+
+    
 
 }
