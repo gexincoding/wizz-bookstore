@@ -2,10 +2,7 @@ package com.wizz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wizz.dao.Book;
-import com.wizz.dao.LoginUser;
-import com.wizz.dao.ResponseResult;
-import com.wizz.dao.User;
+import com.wizz.dao.*;
 import com.wizz.dto.UserBorrowInfoDto;
 import com.wizz.service.BookService;
 import com.wizz.vo.BorrowInfoVo;
@@ -217,6 +214,7 @@ public class BookController {
 
     /**
      * 根据图书id查询正在借阅这本书的人
+     *
      * @param bookId
      * @return
      */
@@ -227,6 +225,14 @@ public class BookController {
     }
 
 
-    
+    @GetMapping("/all/books")
+    public ResponseResult<Page<Book>> getAllBooks(@RequestParam Integer page, @RequestParam Integer pageSize) {
+        Page<Book> resPage = new Page<>(page, pageSize);
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.orderByAsc("name").orderByDesc("category_id").orderByDesc("publisher");
+        bookService.page(resPage, bookQueryWrapper);
+        return new ResponseResult(200, "查询成功", resPage);
+    }
+
 
 }
