@@ -1,7 +1,8 @@
 package com.wizz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wizz.dao.Category;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wizz.dao.Book;
 import com.wizz.dao.Propose;
 import com.wizz.dao.ResponseResult;
 import com.wizz.service.ProposeService;
@@ -34,5 +35,25 @@ public class ProposeController {
         proposeService.remove(proposeQueryWrapper);
         return new ResponseResult(200, "删除成功");
     }
+
+
+    /**
+     * 查看所有建议
+     *
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/list")
+    public ResponseResult list(@RequestParam Integer page, @RequestParam Integer pageSize) {
+        Page<Propose> resPage = new Page<>(page, pageSize);
+        QueryWrapper<Propose> proposeQueryWrapper = new QueryWrapper<>();
+        proposeQueryWrapper.orderByDesc("update_time").orderByDesc("create_time").orderByDesc("user_id");
+        proposeService.page(resPage, proposeQueryWrapper);
+        return new ResponseResult(200, "查询成功", resPage);
+    }
+
+
+
 
 }

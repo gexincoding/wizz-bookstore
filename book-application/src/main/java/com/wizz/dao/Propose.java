@@ -20,4 +20,7 @@ public class Propose {
     private Long userId;
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 }
